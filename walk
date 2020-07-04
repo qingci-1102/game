@@ -1,0 +1,13 @@
+int Map::walk()
+{
+	char c;
+	while(c=getch())
+	{   
+		if(c==27) return Esc; 
+		if(c==72) return left; 
+		if(c==80) return right; 
+		if(c==75) return up; 
+		if(c==77) return down; 
+	}
+	return -1;
+}
