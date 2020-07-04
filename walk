@@ -11,3 +11,70 @@ int Map::walk()
 	}
 	return -1;
 }
+int Map::startgame()
+{    
+	int x=(Size+1)/2;
+	int y=(Size+1)/2;
+	int flag=0,select;
+	while(iftime!=true)
+	{
+		select=walk(); 
+		q.Enqueue(x);
+		q.Enqueue(y);
+		switch(select)
+		{
+		case up:
+			if(maparr[x][y-1]!=wall)
+			{   
+				maparr[x][y]=road;
+				maparr[x][y-1]=mouse;
+				display(x,y);
+				display(x,y-1);
+				y--;
+			}
+			break;
+		case down:
+			if(maparr[x][y+1]!=wall)
+			{   
+				maparr[x][y]=road;
+				maparr[x][y+1]=mouse;
+				display(x,y);
+				display(x,y+1);
+				y++;
+			}
+			break;
+		case left:
+			if(maparr[x-1][y]!=wall)
+			{   
+				maparr[x][y]=road;
+				maparr[x-1][y]=mouse;
+				display(x,y);
+				display(x-1,y);
+				x--;
+			}
+			break;
+		case right:
+			if(maparr[x+1][y]!=wall)
+			{   
+				maparr[x][y]=road;
+				maparr[x+1][y]=mouse;
+				display(x,y);
+				display(x+1,y);
+				x++;
+			}
+			break;
+		case Esc:
+			flag=1;
+			break;
+		default:
+			break;
+		}
+		if(maparr[Size-1][Size]==mouse||flag==1)
+			break;
+		if(iftime==true)
+			return -1;
+	}
+	if(flag==1)
+		return 0;
+	return 1;
+}
