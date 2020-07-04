@@ -1,0 +1,99 @@
+#include<iostream>
+#include<string>
+#include<stdlib.h>
+#include<windows.h>
+#include<time.h>
+#include <conio.h>
+using namespace std;
+
+#define Size 15
+#define maxsmall 7
+#define smallroad 6
+#define mouse 4
+#define start 2
+#define end 3
+#define wall 1
+#define road 0
+#define up 0
+#define down 1
+#define left 2
+#define right 3
+#define Esc 5
+bool iftime=false;
+const int Max=1000;
+
+Map::Map()
+{
+	int i,j;
+	count=0;
+	for(i=1;i<=Size;i++)
+		for(j=1;j<=Size;j++)
+			maparr[i][j]=wall;
+}
+void Map::startpaint()
+{  
+	maparr[(Size+1)/2][(Size+1)/2]=mouse; 
+	maparr[Size-1][Size]=end; 
+	for(int i=1;i<=Size;i++)
+	{
+		for(int j=1;j<=Size;j++)
+		{  
+			if(maparr[i][j]==mouse && (i!=(Size+1)/2 || j!=(Size+1)/2))
+				maparr[i][j]=road;
+			display(i,j);
+		}
+		cout<<endl;
+	}
+}
+void Map::display(int i,int j)
+{    
+	remove(2*j-2,i-1);
+	switch(maparr[i][j])
+	{
+	case start:
+		cout<<"入";
+		break; 
+	case end:
+		cout<<"出";
+		break; 
+	case wall:
+		cout<<"■";
+		break; 
+	case road:
+		cout<<"  ";
+		break; 
+	case mouse :
+		cout<<"♀";
+		break;
+	case smallroad:
+		cout<<"*";
+		break;
+	case maxsmall:
+		cout<<"@";
+		break;
+	}
+}
+void Map::creatmap(int x,int y)
+{
+	int c[4][2]={0,1,1,0,0,-1,-1,0}; 
+	int i,j,t;
+	for(i=0;i<4;i++)
+	{
+		j=rand()%4;
+		t=c[i][0];c[i][0]=c[j][0];c[j][0]=t;
+		t=c[i][1];c[i][1]=c[j][1];c[j][1]=t;
+	}
+	maparr[x][y]=road;
+	for(i=0;i<4;i++)
+		if(maparr[x+2*c[i][0]][y+2*c[i][1]]==wall)
+		{
+			maparr[x+c[i][0]][y+c[i][1]]=road;
+			creatmap(x+2*c[i][0],y+2*c[i][1]);
+		}
+}
+void Map::creatall()
+{       
+	srand((unsigned)time(NULL));
+	creatmap(2*(rand()%(Size/2)+1),2*(rand()%(Size/2)+1)); 
+	
+} 
