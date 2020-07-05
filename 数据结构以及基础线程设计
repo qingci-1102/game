@@ -1,0 +1,116 @@
+#define Size 15
+#define maxsmall 7
+#define smallroad 6
+#define mouse 4
+#define start 2
+#define end 3
+#define wall 1
+#define road 0
+#define up 0
+#define down 1
+#define left 2
+#define right 3
+#define Esc 5
+bool iftime=false;
+const int Max=1000;
+
+class Cirqueue
+{
+public :
+	Cirqueue(){front=rear=Max-1;}
+	void Enqueue(int x)
+	{
+        if((rear+1)%Max==front)
+			cout<<"Queue Full"<<endl;
+		else
+		{
+			rear=(rear+1)%Max;
+			data[rear]=x;
+		}
+	}
+	int Dequeue()
+	{  
+		if(rear==front)
+			return 0;
+		else
+		{  
+			
+			front=(front+1)%Max;
+			return data[front];
+		}
+	}
+	int empty()
+	{
+		if(rear==front)
+			return 0;
+		return 1;
+	}
+	void deleteall()
+	{
+		while(empty()!=0)
+		{
+			Dequeue();
+		}
+	}
+private:
+	int front,rear;
+	int data[Max];
+};Cirqueue q;
+
+class Map
+{
+private:
+	char maparr[Size+1][Size+1];
+    int direction;
+	
+public:
+    Map();
+	int count;
+	void creatmap(int x,int y);
+	void meungame(int number);
+	void startpaint();
+	void creatall();
+	int startgame();
+	void roaddisplay();
+	void smallroaddisplay(int x,int y);
+	void display(int i,int j);
+	int walk();
+};
+void meun();
+void gameexplain();
+void remove(int x,int y) 
+{
+	COORD coord;
+	coord.X=x;
+	coord.Y=y;
+	SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord );
+}
+void hidden()
+{
+  	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cci;
+	GetConsoleCursorInfo(hOut,&cci);
+	cci.bVisible=0;
+	SetConsoleCursorInfo(hOut,&cci);
+}
+HANDLE hThread1;
+DWORD WINAPI Thread1(LPVOID lpParameter)
+{                                
+	int i=30;
+	iftime=false;
+	while(1)
+	{   	
+		remove(2,17);
+		printf("\r\t%02d",i);
+		if(i==0)
+		{  
+			iftime=true;
+			TerminateThread(hThread1, 0);
+			CloseHandle(hThread1);
+			break; 
+		}
+		Sleep(1000);
+		i--;	
+	} 	
+	return 0;
+}
