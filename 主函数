@@ -1,0 +1,122 @@
+int main()
+{
+	char choich;
+	while(true)
+	{
+		int number=1;
+		hidden();
+		meun();
+		cin>>choich;
+		int select,flag=0;
+		string go;
+		switch(choich)
+		{
+		case '1':
+		    system("cls");
+			while(true)
+			{
+				Map map;
+				map.creatall();
+				flag=0;
+				while(true)
+				{
+					map.meungame(number);
+					system("cls");
+					map.startpaint();
+					cout<<"====================="<<endl;
+					cout<<"........倒计时......."<<endl;
+					hThread1 = CreateThread(NULL, 0, Thread1, NULL, 0, NULL);
+					Sleep(1000);
+					select=map.startgame();
+					if(select==1 && iftime==false)
+					{
+						map.roaddisplay();
+						TerminateThread(hThread1, 0);
+						CloseHandle(hThread1);
+						remove(2,18);
+						cout<<"......恭喜你成功走出迷宫......"<<endl;
+						while(true)
+						{
+							cout<<"查看最短路径ok"<<endl;
+							cout<<"是否继续闯关yes/no"<<endl;
+							cin>>go;
+							if(go=="yes")
+							{
+								flag=0;
+								number++;
+							}
+							else if(go=="no")
+								flag=1;
+							else if(go=="ok")
+							{
+								flag=-1;
+								system("cls");
+								map.smallroaddisplay((Size+1)/2,(Size+1)/2);
+								cout<<endl;
+								system("pause");
+							}
+							else
+							{
+								flag=-1;
+								cout<<"输入不合法,请重新输入yes/no"<<endl;
+							}
+							if(flag==1||flag==0)
+								break;
+						}
+						if(flag==1||flag==0)
+							break;
+					}
+					if(select==-1 && iftime==true)
+					{
+						TerminateThread(hThread1, 0);
+						CloseHandle(hThread1);
+						remove(2,18);
+						cout<<"未在规定时间内走出迷宫，游戏失败"<<endl;
+						cout<<"是否再一次闯本关（yes） 或 退出（no）"<<endl;
+						while(cin>>go)
+						{
+							if(go=="yes")
+							{
+							    flag=0;
+								q.deleteall();
+								break;
+							}
+							else if(go=="no")
+							{
+								flag=1;
+								break;
+							}
+							else
+								cout<<"输入不合法,请重新输入yes/no"<<endl;
+						}
+					}
+					if(select==0||flag==1)
+					{
+						TerminateThread(hThread1, 0);
+						CloseHandle(hThread1);
+						break;
+					}
+				}
+				if(flag==1||select==0)
+				{
+				system("cls");
+					break;
+				}
+			}
+			break;
+		case '2':
+			gameexplain();
+			system("cls");
+			break;
+		case '3':
+			exit(0);
+			break;
+		default:
+			cout<<"输入不合法,请重新输入"<<endl;
+		    system("pause");
+			system("cls");
+			break;
+		}
+	}
+    return 0;
+}
