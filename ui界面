@@ -1,0 +1,50 @@
+void meun()
+{   
+
+	cout<<"——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·"<<endl;
+    cout<<"                                                          "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"                  欢 迎 来 到 迷 宫 游 戏                 "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"                      1 . 开 始 游 戏                     "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"                      2 . 帮 助                           "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"                      3 . 退 出 游 戏                     "<<endl;
+	cout<<"                                                          "<<endl;
+    cout<<"                                                          "<<endl;
+	cout<<"                                                          "<<endl;
+	cout<<"——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·"<<endl;
+}
+void gameexplain()
+{
+	system("cls");
+	cout<<"——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·"<<endl;
+    cout<<"                                                         "<<endl;
+	cout<<"                                                         "<<endl;
+	cout<<"         1.键盘控制行走                                  "<<endl;
+	cout<<"                                                         "<<endl;
+	cout<<"            up向上走；                                   "<<endl;
+	cout<<"            down向下走；                                 "<<endl;
+	cout<<"            left向左走；                                 "<<endl;
+	cout<<"            right向右走。                                "<<endl;
+	cout<<"                                                         "<<endl;
+	cout<<"         2.若游戏中途想要退出，请按ESC键                 "<<endl;
+	cout<<"                                                         "<<endl;
+	cout<<"         3.在规定的时间内走出迷宫则为成功，否则游戏失败  "<<endl;
+	cout<<"                                                         "<<endl;
+	cout<<"         4.关卡难度会逐渐加大                            "<<endl;
+	cout<<"——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·——·"<<endl;
+	system("pause");
+}
+void Map::meungame(int number)
+{  
+	system("cls");
+	count=number;
+	cout<<"                                         "<<endl;
+	cout<<"           第"<<count<<"关               "<<endl;
+	cout<<"                                         "<<endl;
+	cout<<"                                         "<<endl;
+	system("pause");
+}
