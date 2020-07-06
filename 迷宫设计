@@ -45,6 +45,15 @@ void Map::startpaint()
 		cout<<endl;
 	}
 }
+
+void remove(int x,int y) 
+{
+	COORD coord;   //获取坐标 
+	coord.X=x;
+	coord.Y=y;
+	SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord );
+}
+
 void Map::display(int i,int j)
 {    
 	remove(2*j-2,i-1);
